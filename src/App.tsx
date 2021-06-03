@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Table,User } from './Components/Table';
+import {Form} from './Components/Form';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type MyState = {
+  users:User[];
+}
+class App extends React.Component<{},MyState> {
+  state: MyState ={
+    users: []
+  }
+ // const usersData:User[] = 
+  
+ removeUser = (index:any) => {
+  const { users } = this.state
+   this.setState({
+    users: users.filter((_, i) => {
+      return i !== index
+    }),
+  })
+}
+
+handleSubmit = (user:User) => {
+    this.setState({users:[...this.state.users,user]})
+}
+
+  render(){
+    return (
+      <div className="container">
+        <Table users={this.state.users} removeUser={this.removeUser}/>
+        <Form handleSubmit= {this.handleSubmit}/>
+      </div>
+    );
+  }
+
 }
 
 export default App;
