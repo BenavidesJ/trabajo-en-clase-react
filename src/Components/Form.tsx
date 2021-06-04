@@ -12,7 +12,7 @@ export class Form extends React.Component<FormProps> {
     }
 
     state = this.initialState
-
+    options = [{label: 'San Jose', value: 'sj'},{label: 'Heredia', value: 'hd'},{label: 'Alajuela', value: 'aj'}]
 
     handelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
@@ -21,6 +21,9 @@ export class Form extends React.Component<FormProps> {
         });
     }
 
+    handleSelect = (event:React.ChangeEvent<HTMLSelectElement>) =>{
+        alert(event.target.value);
+    }
     submitForm = () => {
         this.props.handleSubmit(this.state);
         this.setState(this.initialState);
@@ -34,7 +37,10 @@ export class Form extends React.Component<FormProps> {
 
                 <label htmlFor="job">Job</label>
                 <input type="text" name='job' id='job' value={job} onChange={this.handelChange}/>
-
+                <label htmlFor="address">Address</label>
+                <select name="address" onChange={this.handleSelect}>
+                    {this.options.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                </select>
                 <input type="button" value="submit" onClick= {this.submitForm} />
             </form>   
 

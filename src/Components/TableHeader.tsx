@@ -5,6 +5,7 @@ const TableHeader: React.FC = ()=>{
     <thead>
         <th>Name</th>
         <th>Job</th>
+        <th>Greeting</th>
         <th>Action</th>
     </thead>
     )
